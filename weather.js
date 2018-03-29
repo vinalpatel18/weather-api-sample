@@ -11,10 +11,10 @@ module.exports = function (location,callback) {
 		json: true}
 		,function (error, response, body) {
 			if(error){
-				callback('unable to fetch weather')
+				return callback('unable to fetch weather')
 			}
 			else{
-				callback(JSON.stringify(body, null, 4));
+				return callback(body);
 			}
 		});
 

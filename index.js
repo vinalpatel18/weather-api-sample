@@ -14,9 +14,15 @@ app.get('/weather',middleware.logger,function (req,res) {
 	if(typeof city ==='string' && city.length > 0 ){
 		console.log('Ciy name is '+city);
 		weather(city,function (weather) {
-			res.send(weather);
+			if(weather.cod === 200){
+				 res.send("Tempreture in "+city+ " is " +weather.main.temp+ " farenhite" );
+			
+				}
+			else{
+			res.send('City not found');
+				
+		}
 		});
-
 	}
 	else{
 		location(function (location) {
@@ -24,7 +30,8 @@ app.get('/weather',middleware.logger,function (req,res) {
 			city=location.city;
 
 			weather(city,function (weather) {
-					res.send(weather);
+					 res.send("You are located in "+city+ " and temperature is " +weather.main.temp+ " farenhite" );
+			
 			});
 
 		});
